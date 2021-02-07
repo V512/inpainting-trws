@@ -4,17 +4,16 @@
 #include "neighborStruct.h"
 #include "trwsInpainting.h"
 
-int main() {
-    TimeMeasurement time;
-    cv::Mat image = cv::imread("C:\\vlad\\Development\\TRWS\\inpainting\\mona-lisa-damaged.png", 1);
-    // cv::Mat image = cv::Mat(cv::Size(2, 2), CV_8UC1);
-    // image.at<uint8_t>(0, 0) = 0;
-    // image.at<uint8_t>(0, 1) = 128;
-    // image.at<uint8_t>(1, 0) = 64;
-    // image.at<uint8_t>(1, 1) = 255;
-    // cv::resize(image, image, cv::Size(20, 20));
-    // cv::imshow("image", image);
-    // cv::waitKey(0);
+int main(int argc, char* argv[]) {
+    std::string imagePath = argv[1];
+    printf("Image path %s\n", imagePath.c_str());
+    cv::Mat image = cv::imread(imagePath, 1);
+
+    if(image.empty()) {
+        printf("Image is null\n");
+        return -1;
+    }
+
     inpainting(image, 5);
     return 0;
 }
